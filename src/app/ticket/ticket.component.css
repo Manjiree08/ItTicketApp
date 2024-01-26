@@ -1,0 +1,22 @@
+.statusdiv{
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.card{
+    margin: 10px;
+    width: 33%;
+    text-align: center;
+  .card-header{
+    color:white
+  }
+}
+span{
+    font-size: 24px;
+    color: green;
+ 
+}
+span:hover{
+    text-decoration: underline;
+ }

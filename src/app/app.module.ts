@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
+import { TicketComponent } from './ticket/ticket.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ROUTES, RouterModule } from '@angular/router';
 
@@ -12,7 +13,9 @@ import { ROUTES, RouterModule } from '@angular/router';
   declarations: [
     AppComponent,
     LoginComponent,
-    ViewTicketComponent
+    ViewTicketComponent,
+    TicketComponent,
+    
   ],
   imports: [
     BrowserModule,

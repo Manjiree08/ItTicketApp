@@ -1,5 +1,5 @@
-<div>
-  <form class="container" [formGroup]="loginForm" style="top: 50%;left: 50%;">
+<div class="container" style="text-align: center;border: 1px solid rgb(37, 105, 151);">
+  <form  [formGroup]="loginForm" style="padding: 20px;">
     <h1>Log In</h1>
     <div *ngIf="errMsg.length > 0">
     <span *ngFor="let msg of errMsg">{{msg}}</span>

@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   errMsg=[];
-  constructor(private route:Router) { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -21,7 +21,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    this.route.navigate(['view-ticket']);
+    if(this.loginForm.value.username=='admin' &&
+    this.loginForm.value.password=='123'){
+      this.router.navigate(['view-ticket'], { queryParams: {status:'Resolve'}});
+    }
+    else{
+      this.router.navigate(['ticket']);
+    }
   }
 }
 /* username: new FormControl('', [Validators.required, Validators.pattern(/^[\w\s]+$/)]),

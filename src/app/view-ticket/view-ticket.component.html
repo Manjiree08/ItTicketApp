@@ -1,2 +1,21 @@
-<p>view-ticket works!</p>
-<router-outlet></router-outlet>
+<div class="container">
+    <h1>View Tickets</h1>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th *ngIf="isClose || isResolve"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td *ngIf="isClose"><button class="btn btn-primary" (click)="CloseTicket()">Close Ticket</button></td>
+            <td *ngIf="isResolve"><button class="btn btn-primary" (click)="ResolveTicket()">Add Resolution</button></td>
+          </tr>
+          
+        </tbody>
+      </table>
+</div>

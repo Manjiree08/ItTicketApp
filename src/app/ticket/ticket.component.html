@@ -1,1 +1,53 @@
-<p>ticket works!</p>
+<div style="margin: 10px;"></div>
+<div class="container">
+    <!-- <button type="button" class="btn btn-primary">New Ticket</button> -->
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Ticket</h4>
+            </div>
+             <!-- Modal body -->
+            <div class="modal-body">
+                <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+                    <div class="form-group">
+                        <label for="uname">Subject:</label>
+                        <input type="text" class="form-control" placeholder="Subject" formControlName="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="uname">Description:</label>
+                        <input type="text" class="form-control" placeholder="Description" formControlName="description" required style="height:100px">
+                    </div>
+                    <div class="form-group" *ngIf="isResolve">
+                        <label for="uname">Resolution:</label>
+                        <input type="text" class="form-control" placeholder="Resolution" formControlName="description" required style="height:100px">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+ 
+
+   <div class="statusdiv" *ngIf="!isResolve">
+    <div class="card">
+        <div class="card-header" style="background-color:#ef4646; ">Open</div>
+        <div class="card-body">
+           <span (click)="viewTickets('Open')">10</span> 
+        </div>
+        
+      </div>
+      <div class="card">
+        <div class="card-header" style="background-color: #f28528;">Solved</div>
+        <div class="card-body">
+          <span (click)="viewTickets('Solved')">10</span>
+        </div>
+        
+      </div>
+      <div class="card">
+        <div class="card-header" style="background-color: #49bd49;">Closed</div>
+        <div class="card-body">
+            <span (click)="viewTickets('Closed')">10</span>
+        </div>
+        
+      </div>
+   </div>
+</div>
