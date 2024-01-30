@@ -8,7 +8,8 @@ import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ROUTES, RouterModule } from '@angular/router';
-
+import { CommonService } from './common.service';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,9 +21,10 @@ import { ROUTES, RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

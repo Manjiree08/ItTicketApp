@@ -1,37 +1,68 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute,Router } from '@angular/router';
+import { CommonService} from '../common.service'
 @Component({
   selector: 'view-ticket',
   templateUrl: './view-ticket.component.html',
   styleUrls: ['./view-ticket.component.css']
 })
 export class ViewTicketComponent implements OnInit {
-  myForm:FormGroup
   status:string;
   isClose:boolean;
-  isResolve:boolean
-  constructor(private route:ActivatedRoute,private router:Router) { }
+  isResolve:boolean;
+  isSolved:boolean;
+  data:any=[];
+  constructor(private route:ActivatedRoute,private router:Router,private CommonService:CommonService) { }
 
   ngOnInit() {debugger
-    this.myForm = new FormGroup({
-      subject: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
-    })
     this.status = this.route.snapshot.queryParamMap.get('status');
-    if(this.status== "Closed"){
+    if(this.status== "closed"){
       this.isClose=true;
+    }
+    else if(this.status == "solved"){
+      this.isSolved=true
     }
     else if(this.status == "Resolve"){
       this.isResolve=true
     }
+    this.CommonService.GetUser().subscribe((data :any) => {debugger
+      console.log("get data => ",data);
+      if(this.status=='open'){debugger
+        this.data=data;
+      }
+      else if(this.status=='Resolve'){
+        for(let i=0;i<data.length;i++){
+          if(data[i].status=='open'){
+               this.data.push(data[i]);
+             }
+          }
+       }
+      else{
+        for(let i=0;i<data.length;i++){
+          if(data[i].status==this.status){
+               this.data.push(data[i]);
+             }
+          }
+       }
+      })
   }
 
-  submitForm() {
-    console.log(this.myForm.value);
+
+
+  ResolveTicket(id){
+    this.router.navigate(['ticket'], { queryParams: {status:'Resolve',id:id}});
   }
 
-  ResolveTicket(){
-    this.router.navigate(['ticket'], { queryParams: {status:'Resolve'}});
+  CloseTicket(data){debugger
+    let user=data;
+    user.status="closed";
+    this.CommonService.saveUser(user).subscribe(data =>  
+      {debugger
+        alert("Ticket closed sucessfully");
+      window.location.reload();
+      }, 
+      error => {
+        console.log(error);
+      })
   }
 }

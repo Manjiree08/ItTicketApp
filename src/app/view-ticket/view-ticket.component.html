@@ -5,15 +5,17 @@
           <tr>
             <th>Subject</th>
             <th>Description</th>
-            <th *ngIf="isClose || isResolve"></th>
+            <th *ngIf="isClose || isSolved">Resolution</th>
+            <th *ngIf="isSolved || isResolve"></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td *ngIf="isClose"><button class="btn btn-primary" (click)="CloseTicket()">Close Ticket</button></td>
-            <td *ngIf="isResolve"><button class="btn btn-primary" (click)="ResolveTicket()">Add Resolution</button></td>
+          <tr *ngFor="let temp of data">
+            <td>{{temp.subject}}</td>
+            <td>{{temp.description}}</td>
+            <td *ngIf="isClose||isSolved">{{temp.resolution}}</td>
+            <td *ngIf="isSolved"><button class="btn btn-primary" (click)="CloseTicket(temp)">Close Ticket</button></td>
+            <td *ngIf="isResolve"><button class="btn btn-primary" (click)="ResolveTicket(temp._id)">Add Resolution</button></td>
           </tr>
           
         </tbody>
