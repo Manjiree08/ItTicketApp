@@ -10,12 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ROUTES, RouterModule } from '@angular/router';
 import { CommonService } from './common.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SideNavComponent } from './side-nav/side-nav.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ViewTicketComponent,
     TicketComponent,
+    SideNavComponent,
     
   ],
   imports: [

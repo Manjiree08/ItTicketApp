@@ -72,7 +72,9 @@ export class TicketComponent implements OnInit {
       user.status= 'open';
       this.CommonService.saveUser(user).subscribe(data =>  
         {debugger
-          alert(data.data);
+          alert("Ticket Created");
+          this.myForm.reset();
+          this.open +=1 ;
         }, 
         error => {
           this.errorMessage = error

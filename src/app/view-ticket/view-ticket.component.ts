@@ -59,7 +59,7 @@ export class ViewTicketComponent implements OnInit {
     this.CommonService.saveUser(user).subscribe(data =>  
       {debugger
         alert("Ticket closed sucessfully");
-      window.location.reload();
+        this.router.navigate(['ticket']);
       }, 
       error => {
         console.log(error);

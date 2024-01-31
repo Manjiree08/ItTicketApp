@@ -1,15 +1,15 @@
-<div class="container" style="text-align: center;border: 1px solid rgb(37, 105, 151);">
-  <form  [formGroup]="loginForm" style="padding: 20px;">
-    <h1>Log In</h1>
+<div class="container">
+  <form  [formGroup]="loginForm" class="myForm">
+    <h1>LOGIN</h1>
     <div *ngIf="errMsg.length > 0">
     <span *ngFor="let msg of errMsg">{{msg}}</span>
     </div>
-    <div>
-        <input type="text" placeholder="Username" formControlName="username">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Username" formControlName="username">
     </div>
-    <div>
-        <input type="password" placeholder="Password" formControlName="password">
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Password" formControlName="password">
     </div>
-    <button (click)="onSubmit()">Submit</button>
+    <button class="btn btn-primary" (click)="onSubmit()">Login</button>
   </form>
 </div>

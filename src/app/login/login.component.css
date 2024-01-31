@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+justify-content: center;
+align-items: center;
+margin: 50px;
+
+}
+.myForm{
+    padding: 20px;
+    width: 50%;
+    border: 1px solid #dee2e6;
+}
