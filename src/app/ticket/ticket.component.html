@@ -10,18 +10,18 @@
             <div class="modal-body">
                 <form [formGroup]="myForm" (ngSubmit)="submitForm()">
                     <div class="form-group">
-                        <label for="uname">Subject:</label>
+                        <label for="uname">Subject<span class="error">*</span></label>
                         <input type="text" class="form-control" placeholder="Subject" formControlName="subject" required>
                     </div>
                     <div class="form-group">
-                        <label for="uname">Description:</label>
+                        <label for="uname">Description<span class="error">*</span></label>
                         <input type="text" class="form-control" placeholder="Description" formControlName="description"  required style="height:100px">
                     </div>
                     <div class="form-group" *ngIf="isResolve">
-                        <label for="uname">Resolution:</label>
+                        <label for="uname">Resolution<span class="error">*</span></label>
                         <input type="text" class="form-control" placeholder="Resolution" formControlName="resolution" required style="height:100px">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Submit</button>
                 </form>
             </div>
         </div>

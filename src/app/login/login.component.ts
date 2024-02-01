@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required),
+      username: new FormControl('', [Validators.required,Validators.email]),
       password: new FormControl('', Validators.required)
     })
   }
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     this.authService.log();
     localStorage.setItem('isLoggedIn', "true");  
-    if(this.loginForm.value.username=='admin' &&
+    if(this.loginForm.value.username=='admin@gmail.com' &&
     this.loginForm.value.password=='123'){
       this.router.navigate(['view-ticket'], { queryParams: {status:'Resolve'}});
     }
@@ -32,5 +32,3 @@ export class LoginComponent implements OnInit {
     }
   }
 }
-/* username: new FormControl('', [Validators.required, Validators.pattern(/^[\w\s]+$/)]),
-      password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{5,}')]) */

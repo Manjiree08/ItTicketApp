@@ -25,7 +25,7 @@ export class ViewTicketComponent implements OnInit {
     else if(this.status == "Resolve"){
       this.isResolve=true
     }
-    this.CommonService.GetUser().subscribe((data :any) => {debugger
+    this.CommonService.GetTickets().subscribe((data :any) => {debugger
       console.log("get data => ",data);
       if(this.status=='open'){debugger
         this.data=data;
@@ -54,9 +54,9 @@ export class ViewTicketComponent implements OnInit {
   }
 
   CloseTicket(data){debugger
-    let user=data;
-    user.status="closed";
-    this.CommonService.saveUser(user).subscribe(data =>  
+    let ticketdata=data;
+    ticketdata.status="closed";
+    this.CommonService.saveTicket(ticketdata).subscribe(data =>  
       {debugger
         alert("Ticket closed sucessfully");
         this.router.navigate(['ticket']);

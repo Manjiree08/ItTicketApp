@@ -1,15 +1,19 @@
 <div class="container">
   <form  [formGroup]="loginForm" class="myForm">
     <h1>LOGIN</h1>
-    <div *ngIf="errMsg.length > 0">
-    <span *ngFor="let msg of errMsg">{{msg}}</span>
-    </div>
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Username" formControlName="username">
+      <div class="error" *ngIf="loginForm.controls.username.touched && loginForm.controls.username.errors as nameErrors">
+        <div *ngIf="nameErrors.required">Username is required</div>
+        <div *ngIf="nameErrors.email">Invalid email</div>
+      </div>    
     </div>
     <div class="form-group">
       <input type="password" class="form-control" placeholder="Password" formControlName="password">
+      <div class="error" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors as nameErrors">
+        <div *ngIf="nameErrors.required">Password is required</div>
+      </div>
     </div>
-    <button class="btn btn-primary" (click)="onSubmit()">Login</button>
+    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="loginForm.invalid">Login</button>
   </form>
 </div>

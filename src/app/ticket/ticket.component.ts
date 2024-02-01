@@ -13,9 +13,9 @@ export class TicketComponent implements OnInit {
   status:string;
   isResolve:boolean;
   errorMessage;
-    open:number;
-    solved:number;
-    closed:number;
+  open:number;
+  solved:number;
+  closed:number;
  ticketId;
  formData:any;
   constructor(private router:Router,private route:ActivatedRoute,private CommonService:CommonService) { }
@@ -26,16 +26,16 @@ export class TicketComponent implements OnInit {
     this.closed=0;
     this.myForm = new FormGroup({
       subject: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      resolution: new FormControl('')
+      description: new FormControl('', Validators.required)
     })
     this.status = this.route.snapshot.queryParamMap.get('status');
     if(this.status == "Resolve"){
-      this.isResolve=true
+      this.isResolve=true;
+      this.myForm.addControl('resolution',new FormControl('',Validators.required));
     }
     this.ticketId = this.route.snapshot.queryParamMap.get('id');
     if(!this.isResolve){
-      this.CommonService.GetUser().subscribe((data :any) => {debugger
+      this.CommonService.GetTickets().subscribe((data :any) => {debugger
         console.log("get data => ",data);
         for(let i=0;i<data.length;i++){
             if(data[i].status=="closed"){
@@ -51,7 +51,7 @@ export class TicketComponent implements OnInit {
         })
     }
     else{
-      this.CommonService.GetUserById(this.ticketId).subscribe((data :any) => {debugger
+      this.CommonService.GetTicketById(this.ticketId).subscribe((data :any) => {debugger
         console.log("get data => ",data);
           this.myForm.patchValue({
             subject: data.subject,
@@ -67,10 +67,10 @@ export class TicketComponent implements OnInit {
 
   submitForm() {debugger
     if(!this.isResolve){
-      let user = this.myForm.value;
-      user.mode= 'Save';
-      user.status= 'open';
-      this.CommonService.saveUser(user).subscribe(data =>  
+      let ticketData = this.myForm.value;
+      ticketData.mode= 'Save';
+      ticketData.status= 'open';
+      this.CommonService.saveTicket(ticketData).subscribe(data =>  
         {debugger
           alert("Ticket Created");
           this.myForm.reset();
@@ -82,16 +82,17 @@ export class TicketComponent implements OnInit {
         })
     }
     else {debugger
-      let user = this.myForm.value;
-      user.mode= 'Update';
-      user.status= 'solved';
-      user.subject=this.formData.subject;
-      user.description=this.formData.description;
-      user._id=this.formData._id;
-      this.CommonService.saveUser(user).subscribe(data =>  
+      let ticketData = this.myForm.value;
+      ticketData.mode= 'Update';
+      ticketData.status= 'solved';
+      ticketData.subject=this.formData.subject;
+      ticketData.description=this.formData.description;
+      ticketData._id=this.formData._id;
+      this.CommonService.saveTicket(ticketData).subscribe(data =>  
         {debugger
           alert("Resolution added!!!");
           this.viewTickets('Resolve');
+          this.myForm.removeControl('resolution');
         }, 
         error => {
           this.errorMessage = error
